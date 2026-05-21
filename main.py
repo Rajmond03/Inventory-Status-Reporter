@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 
 inventory = {}
+critical_products = {}
 
 BASE_DIR = Path(__file__).parent
 
@@ -23,7 +24,7 @@ def get_status(current_stock, minimum_stock):
     
     else:
         return "OK"
-
+    
 with open(INPUT_FILE, "r") as file:
 
     reader = csv.DictReader(file)
@@ -66,3 +67,20 @@ with open(OUTPUT_CSV_FILE, "w", newline="") as file:
             "minimum_stock": data["minimum_stock"],
             "status": status
         })   
+
+with open(OUTPUT_CSV_FILE, "r") as file:
+    reader = csv.DictReader(file)
+
+    for row in reader:
+
+        product_name = row["product_name"]
+
+        if row["status"] == "CRITICAL":
+            
+            critical_products[product_name] = {
+                "current_stock": row["current_stock"],
+                "minimum_stock": row["minimum_stock"]
+            }
+
+with open(OUTPUT_JSON_FILE, "w", encoding= "utf-8") as file:
+    json.dump(critical_products, file, indent=4)
