@@ -24,23 +24,31 @@ def get_status(current_stock, minimum_stock):
     
     else:
         return "OK"
-    
-with open(INPUT_FILE, "r") as file:
+try:  
+    with open(INPUT_FILE, "r") as file:
 
-    reader = csv.DictReader(file)
+        reader = csv.DictReader(file)
 
-    for row in reader:
-        
-        product_name = row["product_name"]
-        current_stock = row["current_stock"]
-        minimum_stock = row["minimum_stock"]
-        
+        try:
+            for row in reader:
+                
+                product_name = row["product_name"]
+                current_stock = row["current_stock"]
+                minimum_stock = row["minimum_stock"]
+                
+                inventory[product_name] = {
+                    "current_stock": current_stock,
+                    "minimum_stock": minimum_stock
+                }
 
-        inventory[product_name] = {
-            "current_stock": current_stock,
-            "minimum_stock": minimum_stock
-        }
-     
+        except KeyError:
+            print("One of the columns is missing.")
+            exit()
+
+except FileNotFoundError:
+    print(f"File not found: {INPUT_FILE}")
+    exit()
+
 with open(OUTPUT_CSV_FILE, "w", newline="") as file:
 
     writer = csv.DictWriter(
@@ -76,7 +84,7 @@ with open(OUTPUT_CSV_FILE, "r") as file:
         product_name = row["product_name"]
 
         if row["status"] == "CRITICAL":
-            
+
             critical_products[product_name] = {
                 "current_stock": row["current_stock"],
                 "minimum_stock": row["minimum_stock"]
