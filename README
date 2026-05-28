@@ -63,4 +63,6 @@ Libraries:
 
     - Used for cleaner and platform-independent file path handling
 
-    
+## Flowchart
+
+![Flowchart](docs/inventory_status_reporter_flowchart.png)
