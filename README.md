@@ -1,6 +1,6 @@
 ## Title:
 
-    # Inventory Status Reporter
+# Inventory Status Reporter
 
 ## Description:
 
