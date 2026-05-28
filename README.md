@@ -1,8 +1,8 @@
 Title:
 
-    Inventory Status Reporter
+    # Inventory Status Reporter
 
-Description:
+## Description:
 
     This program analyzes an inventory.csv file, calculates the stock status for each product,
     and generates two output files.
@@ -13,7 +13,7 @@ Description:
     The goal of this program is to quickly identify products with critical stock levels and
     reduce manual checking time.
 
-Input:
+## Input:
 
     - File path: Inventory Status Reporter/input/inventory.csv
     - Format: CSV
@@ -24,7 +24,7 @@ Input:
     - current_stock
     - minimum_stock
 
-Output:
+## Output:
 
     First output file:
 
@@ -38,21 +38,21 @@ Output:
     - Format: JSON
     - Content: Only products with CRITICAL status
 
-Status values:
+## Status values:
 
     - OK >> current_stock is greater than minimum_stock
     - WARNING >> current_stock is equal to minimum_stock
     - CRITICAL >> current_stock is lower than minimum_stock
 
-Run:
+## Run:
 
     python main.py
 
-Used technologies:
+## Used technologies:
 
     - Language: Python
 
-Libraries:
+## Libraries:
 
     - csv
     - json
